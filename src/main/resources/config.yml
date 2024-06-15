@@ -1,14 +1,15 @@
-#kill rewards
 killRewards:
-  #network id (int): money (double)
-  #-1 = player
-  #see https://minecraft.fandom.com/wiki/Bedrock_Edition_data_values#Entity_IDs for a list of entity IDs
-  -1: 10.0
-  12: 1.0
-  32: 5.0
-#kill reward message
-#empty = no message
-#use %entity% and %amount% placeholders for entity name and given reward
-message: "§aGot $%amount% from killing %entity%"
-#show kill reward message as a popup
+  # Идентификатор сети (int): деньги (int)
+  #-1 = игрок
+  #см. https://minecraft.fandom.com/wiki/Bedrock\\_Edition\\_data\\_values#Entity\\_IDs для списка ID сущностей
+  '-1': 10.0
+  '12': 1.0
+  '32': 5.0
+# Cообщение о награде за убийство
+# Пусто = нет сообщения
+# Используйте %entity% и %amount% как заполнители для имени сущности и полученной награды
+message: "§aПолучено $%amount% за убийство %entity%"
+# Показывать сообщение о награде за убийство как всплывающее окно
 popupMessage: true
+
+

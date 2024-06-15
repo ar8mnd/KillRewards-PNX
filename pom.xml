@@ -15,8 +15,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>21</source>
+                    <target>21</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -33,29 +33,22 @@
     </build>
     <repositories>
         <repository>
-            <id>nukkitx</id>
-            <url>https://repo.nukkitx.com/main/</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>cn.nukkit</groupId>
-            <artifactId>nukkit</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>provided</scope>
+            <groupId>com.github.PowerNukkitX</groupId>
+            <artifactId>PowerNukkitX</artifactId>
+            <version>master-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>me.onebone</groupId>
-            <artifactId>economyapi</artifactId>
-            <version>2.0.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.lldv.llamaeconomy</groupId>
-            <artifactId>LlamaEconomy</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>com.github.angga7togk</groupId>
+            <artifactId>EconomyAPI-PNX</artifactId>
+            <version>1.0.2</version>
             <scope>system</scope>
-            <systemPath>${basedir}/LlamaEconomy-1.0.0.1-SNAPSHOT.jar</systemPath>
+            <systemPath>${basedir}/lib/EconomyAPI.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

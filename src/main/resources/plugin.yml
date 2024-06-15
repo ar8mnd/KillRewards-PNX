@@ -1,6 +1,6 @@
 name: KillRewards
 main: me.petterim1.killrewards.Main
 version: "${pom.version}"
-api: ["1.0.0"]
+api: ["2.0.0"]
 author: PetteriM1
-softdepend: ["EconomyAPI", "LlamaEconomy"]
+softdepend: ["EconomyAPI"]

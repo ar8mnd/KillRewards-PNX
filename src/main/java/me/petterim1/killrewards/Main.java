@@ -8,14 +8,14 @@ import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDeathEvent;
 import cn.nukkit.event.player.PlayerDeathEvent;
 import cn.nukkit.plugin.PluginBase;
-import me.onebone.economyapi.EconomyAPI;
+import angga7togk.economyapi.database.EconomyDB;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main extends PluginBase implements Listener {
 
-    private Map<Integer, Double> killRewards;
+    private Map<String, Double> killRewards;
     private String message;
     private boolean popupMessage;
 
@@ -29,7 +29,7 @@ public class Main extends PluginBase implements Listener {
             getLogger().warning("No economy plugins not found!");
         }
         saveDefaultConfig();
-        killRewards = (Map<Integer, Double>) getConfig().get("killRewards", new HashMap());
+        killRewards = (Map<String, Double>) getConfig().get("killRewards", new HashMap());
         message = getConfig().getString("message");
         popupMessage = getConfig().getBoolean("popupMessage");
         getServer().getPluginManager().registerEvents(this, this);
@@ -37,12 +37,14 @@ public class Main extends PluginBase implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onEntityDeath(EntityDeathEvent e) {
+        System.out.println(e.getEntity().getName() + " is died");
         if (e.getEntity().getLastDamageCause() instanceof EntityDamageByEntityEvent) {
             EntityDamageByEntityEvent dmgCause = (EntityDamageByEntityEvent) e.getEntity().getLastDamageCause();
             if (dmgCause.getDamager() instanceof Player) {
-                Double reward = killRewards.get(e.getEntity().getNetworkId());
+                Double reward = killRewards.get(String.valueOf(e.getEntity().getNetworkId()));
                 if (reward != null) {
                     if (giveMoney((Player) dmgCause.getDamager(), reward)) {
+                        System.out.println("Player claim reward");
                         if (!message.isEmpty()) {
                             if (popupMessage) {
                                 ((Player) dmgCause.getDamager()).sendPopup(message.replace("%amount%", reward.toString()).replace("%entity%", e.getEntity().getName()));
@@ -77,13 +79,9 @@ public class Main extends PluginBase implements Listener {
         }
     }
 
-    private boolean giveMoney(Player damager, Double reward) {
+    private boolean giveMoney(Player damager, double reward) {
         if (eapi) {
-            return EconomyAPI.getInstance().addMoney(damager, reward) == EconomyAPI.RET_SUCCESS;
-        }
-        if (leco) {
-            net.lldv.llamaeconomy.LlamaEconomy.getAPI().addMoney(damager, reward);
-            return true;
+            return EconomyDB.addMoney(damager, (int) reward);
         }
         return false;
     }
